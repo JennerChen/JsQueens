@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>八皇后问题</title>
+	<meta charset="utf-8">
+	<!-- jquery for dom operation -->
+	<script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+	<!-- underscore.js for fast array operation -->
+	<script src="http://cdn.bootcss.com/underscore.js/1.8.3/underscore-min.js"></script>
+	<!-- core js -->
+	<script type="text/javascript" src="queens.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#size').blur(function(event) {
+				var size = parseInt($(this).val()) ? parseInt($(this).val()) : 8;
+				$(this).val(size);
+				if (size && size >= 4) {
+					$(this).siblings('button').find('span').html('result for queens=' + $(this).val());
+				}
+			});
+			$('button').click(function(event) {
+				var size = parseInt($(this).siblings('input').val());
+				if (getQueens([], size)) {
+					var content = $('#resultDiv');
+					content.empty();
+					var count = 1;
+					result.forEach(function(r) {
+						content.append(count+": ");
+						for (var xpos = 1; xpos <= r.length; xpos++) {
+							content.append("(" + xpos + "," + r[xpos - 1] + ") ");
+						}
+						count++;
+						content.append("<br>");
+					})
+				}
+			});
+		})
+	</script>
+</head>
+<body>
+	<div>
+		<a href='http://baike.baidu.com/link?url=Y8zP90Q0OXZ2lM4JBoJt8IklEqcubPVQD45LL2Ok5pKHUb5lWd8QdQMczNRTCz_kCU4F9qAGXovBWsDlrUhLLK'>八皇后问题</a>
+		<button type="button"><span>result for queens=8</span></button>
+		<input type="text" id='size' placeholder='皇后的数量,大于等于4' value='8'>
+		<div id='resultDiv'>
+			
+		</div>
+	</div>
+
+</body>
+</html>
